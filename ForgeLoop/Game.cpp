@@ -112,6 +112,10 @@ void Game::EnemyTurn() {
 
 // Game Loop - Runs until all enemies or player is defeated
 void Game::Run() {
+
+    std::cout << "Welcome to ForgeLoop, Hero!\n";
+    std::cout << "Prepare yourself for battle and FORGE your way to victory.\n";
+
     while (isRunning) {
         if (!player->IsAlive()) {
             std::cout << "\nYou have been slain!\n";
