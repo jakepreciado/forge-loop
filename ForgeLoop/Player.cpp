@@ -15,9 +15,9 @@ void Player::Attack(Actor& target) {
         specialCooldown--;
 }
 
-// Heals player by 20 HP
+// Heals player by 50 HP
 void Player::Heal() {
-    int healAmount = 20;
+    int healAmount = 50;
     health += healAmount;
     if (health > 100) health = 100; // Max HP == 100
     std::cout << "[Player] " << name << "drinks a potion and heals for " << healAmount
