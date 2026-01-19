@@ -1,4 +1,4 @@
-# Welceome to ForgeLoop!
+# Welcome to ForgeLoop!
 ## Overview
 
 This project is a C++ console application that simulates a basic turn-based combat game. The game allows a player character to battle multiple enemies, using normal attacks, healing, and special attacks. The goal of this project is to further my understanding of C++ programming concepts, including classes, inheritance, virtual functions, STL data structures, loops, conditionals, and functions.
