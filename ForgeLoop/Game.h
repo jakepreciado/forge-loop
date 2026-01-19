@@ -14,6 +14,6 @@ public:
     ~Game();
 
     void Run();    // Main game loop
-    void PlayerTurn();
-    void EnemyTurn();
+    void PlayerTurn(); // Handles player turn
+    void EnemyTurn(); // Handles enemy turn
 };

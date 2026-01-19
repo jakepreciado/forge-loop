@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 
+// Constructor
+// (Sets isRunning == true)
 Game::Game() {
     player = new Player("Hero");
 
@@ -12,6 +14,7 @@ Game::Game() {
     isRunning = true;
 }
 
+// Destructor - Cleans up dynamically allocated memory for player and enemies
 Game::~Game() {
     delete player;
     for (Enemy* e : enemies) {
@@ -19,13 +22,17 @@ Game::~Game() {
     }
 }
 
+// Handles player turn logic. 
+// (Can choose 1-3)
 void Game::PlayerTurn() {
+    // An STD/list of enemies to display
     std::vector<Enemy*> aliveEnemies;
     for (Enemy* e : enemies)
         if (e->IsAlive()) aliveEnemies.push_back(e);
 
     if (aliveEnemies.empty()) return;
 
+    // Action menu
     std::cout << "\nYour turn! Choose an action:\n";
     std::cout << "1. Attack\n";
     std::cout << "2. Heal\n";
@@ -40,14 +47,15 @@ void Game::PlayerTurn() {
             std::cout << i + 1 << ". " << aliveEnemies[i]->GetName()
                 << " (" << aliveEnemies[i]->GetHealth() << " HP)\n";
         }
-        std::cout << "Choose enemy to attack: ";
+        std::cout << "Choose enemy to attack: "; // Selects target for attack
         int targetChoice;
         std::cin >> targetChoice;
+
         if (targetChoice >= 1 && targetChoice <= (int)aliveEnemies.size()) {
             player->Attack(*aliveEnemies[targetChoice - 1]);
             if (!aliveEnemies[targetChoice - 1]->IsAlive()) {
                 std::cout << aliveEnemies[targetChoice - 1]->GetName()
-                    << " has been defeated!\n";
+                    << " has been slain!\n";
                 enemies.erase(std::remove(enemies.begin(), enemies.end(),
                     aliveEnemies[targetChoice - 1]),
                     enemies.end());
@@ -57,21 +65,25 @@ void Game::PlayerTurn() {
             std::cout << "Invalid enemy choice!\n";
         }
         break;
+
     case 2: // Heal
         player->Heal();
         break;
+
     case 3: // Special Attack
         for (size_t i = 0; i < aliveEnemies.size(); i++) {
             std::cout << i + 1 << ". " << aliveEnemies[i]->GetName()
                 << " (" << aliveEnemies[i]->GetHealth() << " HP)\n";
         }
-        std::cout << "Choose enemy for special attack: ";
+        std::cout << "Choose enemy for special attack: "; // Selects target for attack
         std::cin >> targetChoice;
+
         if (targetChoice >= 1 && targetChoice <= (int)aliveEnemies.size()) {
             player->SpecialAttack(*aliveEnemies[targetChoice - 1]);
+            // Removes enemy if defeated
             if (!aliveEnemies[targetChoice - 1]->IsAlive()) {
                 std::cout << aliveEnemies[targetChoice - 1]->GetName()
-                    << " has been defeated!\n";
+                    << " has been slain!\n";
                 enemies.erase(std::remove(enemies.begin(), enemies.end(),
                     aliveEnemies[targetChoice - 1]),
                     enemies.end());
@@ -81,12 +93,14 @@ void Game::PlayerTurn() {
             std::cout << "Invalid enemy choice!\n";
         }
         break;
+
     default:
         std::cout << "Invalid action, you miss your turn!\n";
     }
 }
 
-
+// Handles enemy turn
+// Each enemy still alive attacks the player
 void Game::EnemyTurn() {
     for (Enemy* e : enemies) {
         if (e->IsAlive()) {
@@ -96,10 +110,11 @@ void Game::EnemyTurn() {
     }
 }
 
+// Game Loop - Runs until all enemies or player is defeated
 void Game::Run() {
     while (isRunning) {
         if (!player->IsAlive()) {
-            std::cout << "\nYou have been defeated!\n";
+            std::cout << "\nYou have been slain!\n";
             isRunning = false;
             break;
         }
@@ -112,7 +127,7 @@ void Game::Run() {
             }
         }
         if (!anyEnemiesAlive) {
-            std::cout << "\nYou defeated all the enemies! Victory!\n";
+            std::cout << "\nYou slain all the enemies! You are a true Hero!\n";
             isRunning = false;
             break;
         }
