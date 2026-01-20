@@ -5,8 +5,6 @@ This project is a C++ console application that simulates a basic turn-based comb
 
 The purpose of creating this game was to practice object-oriented programming and to prepare for more advanced game development concepts, such as those used in game engines like Unreal Engine. The project demonstrates how to structure a small game loop, handle player input, and implement polymorphic behavior with a base `Actor` class and derived `Player` and `Enemy` classes.
 
-[Game Demo Video](http://youtube.link.goes.here)
-
 ## Development Environment
 
 - **IDE/Editor:** Microsoft Visual Studio 
