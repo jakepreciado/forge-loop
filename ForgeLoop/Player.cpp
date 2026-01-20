@@ -20,7 +20,7 @@ void Player::Heal() {
     int healAmount = 50;
     health += healAmount;
     if (health > 100) health = 100; // Max HP == 100
-    std::cout << "[Player] " << name << "drinks a potion and heals for " << healAmount
+    std::cout << "[Player] " << name << " drinks a potion and heals for " << healAmount
         << " HP. Current health: " << health << "\n";
 
     if (specialCooldown > 0)
